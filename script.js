@@ -10,41 +10,54 @@ function getComputerChoice() {
         return 'paper'
     }
 }
-
-function getHumanChoice() {
-    let choice = prompt('rock/paper/scissors')
-    choice = choice.toLocaleLowerCase()
-    return choice
-}
-
 let humanScore = 0
 let computerScore = 0
+const computerSelection = getComputerChoice()
+const computerScoreField = document.querySelector('#computerScore')
+const humanScoreField = document.querySelector('#humanScore')
+const container = document.querySelector('#container')
+const resultField = document.createElement("div"
+)
 
-function playGame() {
-    const humanSelection = getHumanChoice()
-    const computerSelection = getComputerChoice()
-
-    function playRound(humanChoice, computerChoice) {
-        let human = humanChoice
-        let computer = computerChoice
-        if ((human === 'rock' && computer === 'paper') || (human === 'paper' && computer === 'scissors') || (human === 'scissors' && computer === 'rock')) {
-            computerScore += 1
-            return "You lose! " + computer + " beats " + human
-
-        } else if ((computer === 'rock' && human === 'paper') || (computer === 'paper' && human === 'scissors') || (computer === 'scissors' && human === 'rock')) {
-            humanScore += 1
-            return "You win! " + human + " beats " + computer
+function playRound(humanChoice) {
+    let human = humanChoice
+    let computer = getComputerChoice()
+    if ((human === 'rock' && computer === 'paper') || (human === 'paper' && computer === 'scissors') || (human === 'scissors' && computer === 'rock')) {
+        computerScore += 1
+        if (computerScore === 5) {
+            humanScore = 0
+            computerScore = 0
+            resultField.textContent = "You lose! " + computer + " beats " + human + ". Computer is Champs"
+            humanScoreField.textContent = humanScore
+            computerScoreField.textContent = computerScore
+            container.appendChild(resultField)
+        } else {
+            resultField.textContent = "You lose! " + computer + " beats " + human
+            humanScoreField.textContent = humanScore
+            computerScoreField.textContent = computerScore
+            container.appendChild(resultField)
         }
-        else {
-            return "Tie! All of you pick " + human
+
+    } else if ((computer === 'rock' && human === 'paper') || (computer === 'paper' && human === 'scissors') || (computer === 'scissors' && human === 'rock')) {
+        humanScore += 1
+        if (humanScore === 5) {
+            humanScore = 0
+            computerScore = 0
+            resultField.textContent = "You win! " + human + " beats " + computer + ". Computer is Champs"
+            humanScoreField.textContent = humanScore
+            computerScoreField.textContent = computerScore
+            container.appendChild(resultField)
+        } else {
+            resultField.textContent = "You win! " + human + " beats " + computer
+            humanScoreField.textContent = humanScore
+            computerScoreField.textContent = computerScore
+            container.appendChild(resultField)
         }
     }
-
-    console.log(playRound(humanSelection, computerSelection), ".You : " + humanScore, ".Computer : " + computerScore)
-
-}
-
-for (let index = 0; index < 5; index++) {
-    playGame()
-
+    else {
+        resultField.textContent = "Tie! All of you pick " + human
+        humanScoreField.textContent = humanScore
+        computerScoreField.textContent = computerScore
+        container.appendChild(resultField)
+    }
 }

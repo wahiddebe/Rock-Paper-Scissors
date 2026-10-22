@@ -8,7 +8,16 @@
 </head>
 
 <body>
-
+    <div id="container">
+        <h3>Select your choice!</h3>
+        <button class="choice-button" id="rock" onclick="playRound('rock')">rock</button>
+        <button class="choice-button" id="paper" onclick="playRound('paper')">paper</button>
+        <button class="choice-button" id="scissors" onclick="playRound('scissors')">scissors</button>
+        <div class="score">
+            <p>Your Score : <span id="humanScore">0</span> </p>
+            <p>Computer Score : <span id="computerScore">0</span></p>
+        </div>
+    </div>
 </body>
 
 <script src="./script.js"></script>
